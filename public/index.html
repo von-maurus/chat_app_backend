@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>band names</title>
+</head>
+
+<body>
+  <script src="socket.io/socket.io.js"></script>
+  <script>
+    var socket = io();
+    socket.on('event', data => { console.log("Client event", data) });
+    socket.on('connect', () => { console.log("Client connected") });
+    socket.on('disconnect', () => { console.log("Client disconnected") });
+
+    socket.emit('request', 'Mauricio'); // emit an event to the socket
+    // io.emit('broadcast', /* … */); // emit an event to all connected sockets
+    socket.on('reply', (payload) => {
+      console.log(payload)
+    }); // listen to the event
+  </script>
+  <h1>Acceso denegado</h1>
+</body>
+
+</html>
