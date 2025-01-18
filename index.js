@@ -6,7 +6,7 @@ const path = require('path');
 const publicPath = path.resolve(__dirname, 'public');
 const server = require('http').createServer(app);
 module.exports.io = require('socket.io')(server);
-require('.sockets/socket');
+require('./sockets/socket');
 
 
 server.listen(process.env.PORT, (error) => {
