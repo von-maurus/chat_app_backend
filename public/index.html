@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>band names</title>
+  <title>chat app server</title>
 </head>
 
 <body>
@@ -16,12 +16,7 @@
     socket.on('disconnect', () => { console.log("Client disconnected") });
 
     socket.emit('request', 'Mauricio'); // emit an event to the socket
-    // io.emit('broadcast', /* … */); // emit an event to all connected sockets
     socket.on('reply', (payload) => {
-      console.log(payload)
-    });
-
-    socket.on('reply-to-browser', (payload) => {
       console.log(payload)
     });
   </script>

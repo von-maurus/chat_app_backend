@@ -4,4 +4,3 @@ This is a NodeJS project using Socket.io in conjunction with ExpressJS for the m
 ## Topics
 - Responsive Flutter design using a Chat application pattern, with classical chat box, contact list, message bubbles, notifications, etc.
 - Using NodeJS as a backend. Use of sockets to listen and send chat messages in real time.
-- 
