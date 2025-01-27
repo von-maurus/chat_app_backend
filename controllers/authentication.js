@@ -22,7 +22,7 @@ const loginUser = async (req, res = response) => {
     // Generate JWT
     const token = await generateToken(userExist.id)
 
-    res.json({ ok: true, token });
+    res.json({ ok: true, token, user: userExist });
   } catch (error) {
     console.error(error);
     res.status(500).json({ ok: false, msg: "[LoginError] Please contact admin..." })
@@ -48,7 +48,6 @@ const createUser = async (req, res = response) => {
 
     // Generate JWT
     const token = await generateToken(user.id)
-
     res.json({ ok: true, user, token });
   } catch (error) {
     console.error(error);
@@ -60,14 +59,14 @@ const createUser = async (req, res = response) => {
 // Validate a session token
 const refresh = async (req, res = response) => {
   try {
-    const { email, password, uid } = req.body
-    // generate a new jwt token
-    const token = await generateToken(uid)
-
+    const { uid } = req.body;
     const user = await User.findById(uid);
+
     if (!user) {
       return res.status(400).json({ ok: false, msg: "User doesn't exist..." })
     }
+    // generate a new jwt token
+    const token = await generateToken(uid)
     res.json({ ok: true, user, token });
 
   } catch (error) {

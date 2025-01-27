@@ -7,7 +7,7 @@ const router = Router();
 /**
  * /api/login
  */
-router.post('/createUser', [
+router.post('/new', [
   check('name', 'Name is required').not().isEmpty(),
   check('name', 'Name has bad type').isString(),
   check('email', 'Email is required').not().isEmpty(),
@@ -27,13 +27,8 @@ router.post('/', [
   validateFields
 ], loginUser);
 
-router.post('/refresh', [
-  check('email', 'Email is required').not().isEmpty(),
-  check('email', 'Email has bad type').isString(),
-  check('email', 'Enter a valid email').isEmail(),
-  check('password', 'Password is required').not().isEmpty(),
-  check('password', 'Password has bad type').isString(),
-  validateFields, validateJWT
+router.get('/refresh', [
+  validateJWT
 ], refresh);
 
 
