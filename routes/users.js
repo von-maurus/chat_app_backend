@@ -1,25 +1,27 @@
 /**
- * /api/login
- * @module routes/auth
- */
+ * @api {get} api/users Request User information
+ *  
+*/
 const { Router } = require('express');
-const { loginUser, refresh } = require('../controllers/authentication');
+const { validateJWT } = require('../middlewares/validate_jwt');
+const { getAllUsers } = require('../controllers/users')
 const { check } = require('express-validator');
 const { validateFields } = require('../middlewares/validate_fields');
-const { validateJWT } = require('../middlewares/validate_jwt');
+const { createUser } = require('../controllers/users');
 const router = Router();
 
-router.post('/', [
+router.get('/', [validateJWT], getAllUsers);
+
+router.post('/create', [
+  check('name', 'Name is required').not().isEmpty(),
+  check('name', 'Name has bad type').isString(),
   check('email', 'Email is required').not().isEmpty(),
   check('email', 'Email has bad type').isString(),
   check('email', 'Enter a valid email').isEmail(),
   check('password', 'Password is required').not().isEmpty(),
   check('password', 'Password has bad type').isString(),
   validateFields
-], loginUser);
+], createUser);
 
-router.get('/refresh', [
-  validateJWT
-], refresh);
 
 module.exports = router;

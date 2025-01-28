@@ -53,7 +53,6 @@ const createUser = async (req, res = response) => {
     console.error(error);
     res.status(500).json({ ok: false, msg: "[CreateUserError] Please contact admin..." })
   }
-
 }
 
 // Validate a session token

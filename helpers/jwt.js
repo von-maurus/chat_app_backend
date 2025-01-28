@@ -20,6 +20,18 @@ const generateToken = (uid) => {
   });
 }
 
+const verifyToken = (token) => {
+  return jwt.verify(token, secretKey, (error, decoded) => {
+    if (error) {
+      console.error(error);
+      return { ok: false, msg: 'Invalid token' };
+    }
+    const { uid } = decoded
+    return { ok: true, uid };
+  });
+};
+
+
 module.exports = {
-  generateToken
+  generateToken, verifyToken
 };
